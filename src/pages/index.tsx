@@ -2,17 +2,18 @@ import { getOptionsForVote } from "@/utils/getRandomPokemons";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { trpc } from "../utils/trpc";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 const Home: NextPage = () => {
-  const {data, isLoading} = trpc.useQuery(["example.hello", {text: "harsh"}])
+  // const {data, isLoading} = trpc.useQuery(["example.hello", {text: "harsh"}])
 
-  const [first, second] = getOptionsForVote();
+  const [first , second] : Array<number> = useMemo(() => getOptionsForVote(), []);
+  const firstPokemon = trpc.useQuery(["pokemon.get-pokemon-by-id", {id: 10}])
 
   const [hydrated, setHydrated] = useState(false);
   useEffect(() => {
       setHydrated(true);
-  }, []); 
+  }, [first]); 
   if (!hydrated) {
       // Returns null on first render, so the client and server match
       return null;
@@ -21,6 +22,8 @@ const Home: NextPage = () => {
   // if (isLoading) { return <div>Loading..</div> }
   // if(data){return <div>{data.greeting}</div>}
   
+  console.log(firstPokemon.data);
+
   return (
     <>
       <Head>

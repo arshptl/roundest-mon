@@ -7,6 +7,9 @@ export const getPokemon = createRouter().query("get-pokemon-by-id", {
     const pokemon = await fetch("https://pokeapi.co/api/v2/pokemon/" + `${input.id}`);
     const res = await pokemon.json();
     const finalData = res;
-    return finalData;
+    return {
+      name: finalData.name,
+      sprites: finalData.sprites,
+    };
   },
 });

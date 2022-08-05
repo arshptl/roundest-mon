@@ -11,7 +11,6 @@ const Home: NextPage = () => {
   const [ids, updateIds] = useState(() => getOptionsForVote());
 
   const [first, second] = ids;
-  // const [first , second] : Array<number> = useMemo(() => getOptionsForVote(), []);
   const firstPokemon = trpc.useQuery([
     "pokemon.get-pokemon-by-id",
     { id: first as number },

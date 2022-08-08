@@ -22,14 +22,20 @@ const Home: NextPage = () => {
     "pokemon.get-pokemon-by-id",
     { id: second as number },
   ]);
+
+  const voteMutation = trpc.useMutation(["pokemon.cast-vote"]);
   // console.log(firstPokemon);
   // console.log(secondPokemon);
 
-  if (firstPokemon.isLoading || secondPokemon.isLoading) return null;
+  // if (firstPokemon.isLoading || secondPokemon.isLoading) return null;
 
   const voteForRoundest = (selected: number) => {
     // TODO: fire mutation for persist changes
-
+    if (selected === first) {
+      voteMutation.mutate({ votedFor: first, votedAgainst: second as number});
+    } else {
+      voteMutation.mutate({ votedFor: second as number, votedAgainst: first as number});
+    }
     updateIds(getOptionsForVote());
   };
   return (

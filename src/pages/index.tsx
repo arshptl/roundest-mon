@@ -96,7 +96,7 @@ const PokemonListing: React.FC<{
         width={256}
         height={256}
         layout="fixed"
-        src={props.pokemon.sprites.front_default}
+        src={props.pokemon.spriteUrl}
         className="w-full"
         alt=""
       />

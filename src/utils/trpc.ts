@@ -3,6 +3,7 @@ import type { AppRouter } from "../server/router";
 import { createReactQueryHooks } from "@trpc/react";
 import type { inferProcedureOutput, inferProcedureInput } from "@trpc/server";
 
+// will helpful when dealing with the client side code
 export const trpc = createReactQueryHooks<AppRouter>();
 
 /**
